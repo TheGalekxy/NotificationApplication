@@ -1,10 +1,9 @@
-require('dotenv').config()
-
 const accountSid = process.env.accountSid;
 const authToken = process.env.authToken;
 const client = require('twilio')(accountSid, authToken); 
 
-client.messages 
+exports.sendSms = (request, response) => {
+    client.messages 
       .create({
          body: 'Hello Charlotte',  
          from: '+19517244678',       
@@ -12,3 +11,5 @@ client.messages
        }) 
       .then(message => console.log(message.sid)) 
       .done();
+    response.send('TEXT SENT SUCCESSFULLY')
+}
